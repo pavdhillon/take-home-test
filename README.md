@@ -44,12 +44,40 @@ flowchart LR
 - `google.cloud.pubsub_v1`: Used for publishing messages to a Pub/Sub topic to notify about job completion.
 
 
+# requirements.txt: Google Cloud Services Dependencies
 
+## Overview
 
+This document outlines the dependencies required for integrating with various Google Cloud services. These dependencies are essential for applications that interact with Google Cloud BigQuery, Google Cloud Storage, and Google Cloud Pub/Sub.
 
+## Process Flow
 
+```mermaid
+flowchart TD
+    A[Google Cloud Services] --> B[google-cloud-bigquery]
+    A --> C[google-cloud-storage]
+    A --> D[google-cloud-pubsub]
+```
 
+## Insights
 
+- The application relies on Google Cloud services for data storage, processing, and messaging.
+- `google-cloud-bigquery` is used for data warehousing and analytics.
+- `google-cloud-storage` is utilized for storing and retrieving large datasets.
+- `google-cloud-pubsub` is employed for asynchronous messaging and event-driven systems.
+
+## Dependencies
+
+```mermaid
+flowchart LR
+    requirements_txt --- |"Includes"| google_cloud_bigquery
+    requirements_txt --- |"Includes"| google_cloud_storage
+    requirements_txt --- |"Includes"| google_cloud_pubsub
+```
+
+- `google-cloud-bigquery`: Provides tools for interacting with Google BigQuery, a fully-managed data warehouse.
+- `google-cloud-storage`: Offers capabilities for storing and accessing data on Google Cloud Storage.
+- `google-cloud-pubsub`: Facilitates message-oriented middleware for sending and receiving messages between independent applications.
 
 
 
