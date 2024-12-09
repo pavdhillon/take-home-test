@@ -196,7 +196,7 @@ gcloud functions deploy process_gcs_file \
 
 ## STEP 6
 Test.
-In order to test navigate to the `test_json_data` folder and upload each to the cloud bucket.
+In order to test navigate to the `json_test_files` folder and upload each to the cloud bucket.
 
 
 
