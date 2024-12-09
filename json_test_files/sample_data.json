@@ -1,0 +1,174 @@
+[
+    {
+      "id": 1,
+      "name": "Alice Smith",
+      "email": "alice.smith@example.com",
+      "created_at": "2024-12-01T10:00:00Z",
+      "address": {
+        "street": "123 Main St",
+        "city": "Springfield",
+        "state": "IL",
+        "zip": "62701"
+      },
+      "purchases": [
+        {
+          "item": "Laptop",
+          "amount": 1200,
+          "purchase_date": "2024-12-01T12:00:00Z"
+        },
+        {
+          "item": "Mouse",
+          "amount": 25,
+          "purchase_date": "2024-12-01T12:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Bob Johnson",
+      "email": "bob.johnson@example.com",
+      "created_at": "2024-12-02T11:30:00Z",
+      "address": {
+        "street": "456 Oak St",
+        "city": "Metropolis",
+        "state": "NY",
+        "zip": "10128"
+      },
+      "purchases": [
+        {
+          "item": "Phone",
+          "amount": 800,
+          "purchase_date": "2024-12-02T14:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Charlie Brown",
+      "email": "charlie.brown@example.com",
+      "created_at": "2024-12-03T14:45:00Z",
+      "address": {
+        "street": "789 Maple Ave",
+        "city": "Shelbyville",
+        "state": "TX",
+        "zip": "75935"
+      },
+      "purchases": []
+    },
+    {
+      "id": 4,
+      "name": "Diana Prince",
+      "email": "diana.prince@example.com",
+      "created_at": "2024-12-04T09:15:00Z",
+      "address": null,
+      "purchases": [
+        {
+          "item": "Book",
+          "amount": 15,
+          "purchase_date": "2024-12-04T10:00:00Z"
+        },
+        {
+          "item": "Notebook",
+          "amount": 5,
+          "purchase_date": "2024-12-04T10:30:00Z"
+        },
+        {
+          "item": "Pen",
+          "amount": 2,
+          "purchase_date": "2024-12-04T10:45:00Z"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Ethan Hunt",
+      "email": "ethan.hunt@example.com",
+      "created_at": "2024-12-05T16:20:00Z",
+      "address": {
+        "street": "500 Bond St",
+        "city": "London",
+        "state": "ENG",
+        "zip": "E1 6AN"
+      },
+      "purchases": []
+    },
+    {
+      "id": 6,
+      "name": "Fiona Gallagher",
+      "email": "fiona.gallagher@example.com",
+      "created_at": "2024-12-06T18:10:00Z",
+      "address": {
+        "street": "100 Elm St",
+        "city": "Chicago",
+        "state": "IL",
+        "zip": "60614"
+      },
+      "purchases": [
+        {
+          "item": "TV",
+          "amount": 400,
+          "purchase_date": "2024-12-06T20:00:00Z"
+        },
+        {
+          "item": "Soundbar",
+          "amount": 200,
+          "purchase_date": "2024-12-06T20:30:00Z"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "George Michaels",
+      "email": "george.michaels@example.com",
+      "created_at": "2024-12-07T12:05:00Z",
+      "address": null,
+      "purchases": []
+    },
+    {
+      "id": 8,
+      "name": "Hannah Montana",
+      "email": "hannah.montana@example.com",
+      "created_at": "2024-12-08T22:00:00Z",
+      "address": {
+        "street": "500 Star Ave",
+        "city": "Nashville",
+        "state": "TN",
+        "zip": "37201"
+      },
+      "purchases": [
+        {
+          "item": "Microphone",
+          "amount": 150,
+          "purchase_date": "2024-12-08T23:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Ian Somerhalder",
+      "email": "ian.somerhalder@example.com",
+      "created_at": "2024-12-09T05:50:00Z",
+      "address": null,
+      "purchases": [
+        {
+          "item": "Headphones",
+          "amount": 50,
+          "purchase_date": "2024-12-09T06:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Jane Doe",
+      "email": "jane.doe@example.com",
+      "created_at": "2024-12-10T07:30:00Z",
+      "address": {
+        "street": "200 South St",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zip": "90001"
+      },
+      "purchases": []
+    }
+  ]
+  
