@@ -151,28 +151,52 @@ flowchart LR
 
 
 
-# take-home-test
-Steps for deployment from terminal
+# Steps for Deployment from IDE/terminal
+Follow the below stepsto successfully deploy the above workflow to Google Cloud Platform
 
-STEP 1
-git clone repo locally
+## STEP 1
+Clone the repo locally:
 
-STEP 2
+```
+'git clone' repo URL
+```
+
+## STEP 2
+Authenticate to GCP via commandline:
+
+```
 gcloud auth login
+```
 
-STEP 3
+## STEP 3
+Set the project you wish to deploy in:
+
+```
 gcloud config set project devoteam-interview-pav-dhillon
+```
 
-STEP 4
+## STEP 4
+Create a BigQuery Dataset. This will be the data set the Cloud Function deploys the tables in:
+
+```
 bq mk test_3
+```
 
-STEP 5
+## STEP 5
+Deploy the Cloud Function:
+
+```
 gcloud functions deploy process_gcs_file \
     --runtime python310 \
     --trigger-resource test-3-pd-cf \
     --trigger-event google.storage.object.finalize \
     --region us-central1 \
     --entry-point process_gcs_file
+```
 
-STEP 6
-Upload file to GCS bucket to test
+## STEP 6
+Test.
+In order to test navigate to the `test_json_data` folder and upload each to the cloud bucket.
+
+
+
