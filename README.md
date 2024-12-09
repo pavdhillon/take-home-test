@@ -176,10 +176,11 @@ gcloud config set project devoteam-interview-pav-dhillon
 ```
 
 ## STEP 4
-Create a BigQuery Dataset. This will be the data set the Cloud Function deploys the tables in:
+Create a BigQuery Dataset. This will be the dataset the Cloud Function deploys the tables in. 
+Edit he parameter as needed - [DATASET_NAME]: The name of the dataset to create. Dataset names must be unique within a project.
 
 ```
-bq mk test_3
+gcloud bigquery datasets create [DATASET_NAME]
 ```
 
 ## STEP 5
