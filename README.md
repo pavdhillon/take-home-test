@@ -183,6 +183,28 @@ bq mk test_3
 ```
 
 ## STEP 5
+Create a GCS bucket: 
+Edit the parameters as needed - [BUCKET_NAME]: The name of the bucket. It must be unique across all GCP buckets.
+--location [LOCATION]: The location where the bucket resides. Examples: US, EU, asia-south1.
+--storage-class [STORAGE_CLASS]: (Optional) The type of storage class. Examples: STANDARD, NEARLINE, COLDLINE, ARCHIVE. Defaults to STANDARD.
+```
+gcloud storage buckets create [BUCKET_NAME] \
+    --location [LOCATION] \
+    --storage-class [STORAGE_CLASS]
+```
+
+## STEP 6
+Create Pub/Sub Topic:
+Edit the parameters as needed - Parameters [TOPIC_NAME]: The name of the topic. Topic names must follow GCP naming conventions.
+
+```
+gcloud pubsub topics create [TOPIC_NAME]
+```
+
+## STEP 7
+Edit the `main.py` file to include the parameters from steps 4,5 & 6.
+
+## STEP 8
 Deploy the Cloud Function:
 
 ```
@@ -194,9 +216,9 @@ gcloud functions deploy process_gcs_file \
     --entry-point process_gcs_file
 ```
 
-## STEP 6
+## STEP 9
 Test.
-In order to test navigate to the `json_test_files` folder and upload each to the cloud bucket.
+In order to test the workflow, navigate to the `json_test_files` folder and upload each file to the GCS bucket. This will invoke the cloud function to create a table in BigQuery and then publish a message to Pub/Sub when the upload has completed. To also verify the steps each Cloud Function is taking, look at the logs for the Cloud Function.
 
 
 
