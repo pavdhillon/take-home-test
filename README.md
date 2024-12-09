@@ -152,13 +152,13 @@ flowchart LR
 
 
 # Steps for Deployment from IDE/terminal
-Follow the below stepsto successfully deploy the above workflow to Google Cloud Platform
+Follow the below steps to successfully deploy the above workflow to Google Cloud Platform
 
 ## STEP 1
 Clone the repo locally:
 
 ```
-'git clone' repo URL
+git clone https://github.com/pavdhillon/take-home-test.git
 ```
 
 ## STEP 2
