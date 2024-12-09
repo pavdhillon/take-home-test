@@ -1,0 +1,21 @@
+[
+    {
+        "ts": "2024-01-01T12:00:00Z",
+        "started": {"pid": 12345},
+        "logged_in": {"username": "test_user"},
+        "session_ids": [1, 2, 3],
+        "events": [
+            {"event_id": 101, "event_type": "login"},
+            {"event_id": 102, "event_type": "logout"}
+        ]
+    },
+    {
+        "ts": "2024-01-01T13:00:00Z",
+        "started": {"pid": 67890},
+        "logged_in": {"username": "another_user"},
+        "session_ids": [4, 5],
+        "events": [
+            {"event_id": 103, "event_type": "view"}
+        ]
+    }
+]
