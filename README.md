@@ -1,4 +1,11 @@
 
+# Architecture Diagram
+
+![image](https://github.com/user-attachments/assets/4d152b67-23c5-4998-823f-6633c5167cfe)
+
+
+
+
 
 # main.py: GCS File Processing and BigQuery Integration
 
