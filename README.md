@@ -5,29 +5,28 @@
 
 
 
-
-
 # main.py: GCS File Processing and BigQuery Integration
 
 ## Overview
 
-This script is designed to process files uploaded to a Google Cloud Storage (GCS) bucket. It detects the schema of the JSON data, dynamically determines the appropriate BigQuery table, and inserts the data into the table. Upon successful completion, it publishes a notification to a Google Cloud Pub/Sub topic.
+This program is designed to process files uploaded to a Google Cloud Storage (GCS) bucket. It detects the schema of the JSON data, dynamically determines the appropriate BigQuery table, and inserts the data into the table. Upon successful completion, it publishes a notification to a Google Cloud Pub/Sub topic.
 
 ## Process Flow
 
 ```mermaid
 flowchart TD
-    A("Start: File Upload to GCS") --> B["process_gcs_file(event, context)"]
-    B --> C["Read JSON from GCS"]
-    C --> D{"Is JSON Line-delimited?"}
-    D -->|No| E["Load JSON as Array of Objects"]
-    D -->|Yes| F["Load Line-delimited JSON"]
-    E --> G["Detect Schema"]
-    F --> G
+    A("Start: GCS File Upload") --> B["Read JSON from GCS"]
+    B --> C{"JSON Format?"}
+    C -->|Array of Objects| D["Load JSON Data"]
+    C -->|Line-delimited| E["Load Line-delimited JSON"]
+    D --> F["Transform Data"]
+    E --> F
+    F --> G["Detect Schema"]
     G --> H["Determine Table ID"]
-    H --> I["Insert Data into BigQuery"]
-    I --> J["Publish Notification to Pub/Sub"]
-    J --> K("End: Process Complete")
+    H --> I["Check/Create BigQuery Table"]
+    I --> J["Insert Data into BigQuery"]
+    J --> K("Publish Notification to Pub/Sub")
+    K --> L("End: Process Complete")
 ```
 # Documentation of the file main.py
 
