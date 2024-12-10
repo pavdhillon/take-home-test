@@ -109,7 +109,7 @@ graph TD;
 - Ensure that the Google Cloud SDK is installed and configured with the necessary permissions to access GCS, BigQuery, and Pub/Sub.
 - The script assumes that the JSON file contains an array of objects or is line-delimited.
 
-## Vulnerabilities
+## Considerations
 - The script does not handle all possible JSON formats and assumes a specific structure.
 - Error handling is basic and could be improved to provide more detailed feedback.
 - The script assumes that the first object in the JSON data is representative of the entire dataset for schema detection.
