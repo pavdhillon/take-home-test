@@ -35,15 +35,18 @@ def process_gcs_file(event, context):
             print("Detected line-delimited JSON format.")
             json_data = [json.loads(line) for line in file_contents.splitlines() if line.strip()]
 
+        # Transform nested arrays to ensure BigQuery compatibility
+        transformed_data = transform_data(json_data)
+
         # Detect schema from JSON
-        schema = detect_schema(json_data)
+        schema = detect_schema(transformed_data)
         print("Detected Schema:", schema)
 
         # Dynamically determine the table_id
         table_id = get_or_create_table(dataset_id, base_table_id, schema)
 
         # Insert data into the table
-        insert_into_bigquery(dataset_id, table_id, json_data)
+        insert_into_bigquery(dataset_id, table_id, transformed_data)
 
         print(f"Data successfully inserted into BigQuery table: {table_id}")
 
@@ -53,6 +56,19 @@ def process_gcs_file(event, context):
     except Exception as e:
         print(f"Error processing file: {e}")
         raise
+
+def transform_data(data):
+    """
+    Flatten repeated records and handle nested JSON arrays.
+    """
+    transformed = []
+    for record in data:
+        if isinstance(record, list):  # Handle repeated records
+            for sub_record in record:
+                transformed.append(sub_record)
+        else:
+            transformed.append(record)
+    return transformed
 
 def detect_schema(data):
     """Detect BigQuery schema from JSON data."""
