@@ -35,15 +35,15 @@ flowchart TD
 This file, `main.py`, is designed to process files uploaded to a Google Cloud Storage (GCS) bucket. It detects the schema of the uploaded JSON file, dynamically determines the appropriate BigQuery table, inserts the data into the table, and publishes a notification to a Google Cloud Pub/Sub topic upon successful completion.
 
 ## Description
-The script is triggered by changes to a GCS bucket. It processes the uploaded JSON file, detects its schema, and dynamically determines the BigQuery table ID. The data is then inserted into the table. Upon successful data insertion, a notification is published to a specified Pub/Sub topic. The script handles both standard JSON and line-delimited JSON formats.
+The script is triggered by changes to a GCS bucket. It processes the uploaded JSON file, detects its schema, and inserts the data into a BigQuery table. The table is dynamically determined based on the schema of the data. After successful data insertion, a notification is sent to a Pub/Sub topic to indicate job completion. The script handles both standard JSON and line-delimited JSON formats and supports nested and repeated records in the JSON data.
 
 ## Structure
-The file is structured to include functions for processing the GCS file, detecting the schema, managing BigQuery tables, inserting data, and notifying job completion via Pub/Sub.
+The file is structured into several functions, each responsible for a specific task in the data processing pipeline. The main function, `process_gcs_file`, orchestrates the entire process, calling other helper functions to transform data, detect schema, manage BigQuery tables, insert data, and send notifications.
 
 ## Dependencies
 - `google.cloud.bigquery`: For interacting with BigQuery.
 - `google.cloud.storage`: For accessing and downloading files from GCS.
-- `google.cloud.pubsub_v1`: For publishing messages to Pub/Sub topics.
+- `google.cloud.pubsub_v1`: For publishing messages to a Pub/Sub topic.
 - `json`: For parsing JSON data.
 
 ## Imports
@@ -66,14 +66,17 @@ from google.cloud import pubsub_v1
 ### `process_gcs_file(event, context)`
 Triggered by a change to a GCS bucket. It processes the uploaded file, detects the schema, determines the table ID, inserts data into the table, and publishes a notification to a Pub/Sub topic.
 
+### `transform_data(data)`
+Flattens repeated records and handles nested JSON arrays to ensure compatibility with BigQuery.
+
 ### `detect_schema(data)`
-Detects the BigQuery schema from JSON data. It uses the first object in the JSON array to infer the schema.
+Detects the BigQuery schema from JSON data by analyzing the first object in the data.
 
 ### `detect_field_schema(key, value)`
 Detects the schema for a single field, including support for RECORD and repeated RECORD types.
 
 ### `get_or_create_table(dataset_id, base_table_id, schema)`
-Checks if a table exists in the dataset. If it doesn't, it creates the table with the given schema.
+Checks if a table exists in the dataset. If it doesn't, creates it with the given schema.
 
 ### `schema_hash(schema)`
 Generates a simple hash from the schema to create a unique table ID for different schemas.
@@ -88,22 +91,29 @@ Inserts rows into a BigQuery table.
 Publishes a message to a Pub/Sub topic to notify about job completion.
 
 ## Example
-To use this file, deploy it as a Cloud Function that is triggered by changes to a specific GCS bucket. Ensure that the necessary Google Cloud services (BigQuery, Pub/Sub) are properly configured and that the appropriate permissions are set.
+To use this file, deploy it as a Cloud Function in Google Cloud Platform, and configure it to trigger on changes to a specific GCS bucket. Ensure that the necessary permissions are set for accessing GCS, BigQuery, and Pub/Sub.
+
+## Dependency Diagram
+```mermaid
+graph TD;
+    A[process_gcs_file] --> B[transform_data];
+    A --> C[detect_schema];
+    A --> D[get_or_create_table];
+    A --> E[insert_into_bigquery];
+    A --> F[notify_job_completion];
+    C --> G[detect_field_schema];
+    D --> H[schema_hash];
+    D --> I[create_bigquery_table];
+```
 
 ## Notes
-- Ensure that the Google Cloud services (BigQuery, GCS, Pub/Sub) are properly configured and that the necessary permissions are granted.
+- Ensure that the Google Cloud SDK is installed and configured with the necessary permissions to access GCS, BigQuery, and Pub/Sub.
 - The script assumes that the JSON file contains an array of objects or is line-delimited.
 
 ## Vulnerabilities
-- The script does not handle all possible JSON formats, which may lead to errors if the input JSON is not in the expected format.
-- There is no explicit error handling for network-related issues when interacting with Google Cloud services.
-
-## Insights
-
-- The script handles both standard JSON arrays and line-delimited JSON formats.
-- It dynamically creates a BigQuery table if it does not exist, using a schema derived from the JSON data.
-- A unique table ID is generated using a hash of the schema to accommodate different data structures.
-- Notifications of successful data processing are sent to a Pub/Sub topic, facilitating integration with other systems.
+- The script does not handle all possible JSON formats and assumes a specific structure.
+- Error handling is basic and could be improved to provide more detailed feedback.
+- The script assumes that the first object in the JSON data is representative of the entire dataset for schema detection.
 
 ## Dependencies
 
